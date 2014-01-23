@@ -7,7 +7,11 @@ d3.svg.textWrap = function (text, width, height) {
     https://github.com/mbostock/d3/issues/1642
     modified by Chris Zubak-Skees */
 
-    function wrap () {
+    function wrap (t, w, h) {
+        if (t) text = t;
+        if (w) width = w;
+        if (h) height = h;
+
         text.each(function() {
             var text = d3.select(this);
 
@@ -61,13 +65,26 @@ d3.svg.textWrap = function (text, width, height) {
                 word = words.pop();
             }
         });
+
+        return wrap;
     }
+
+    if (text) {
+        wrap();
+    }
+
+    wrap.wrap = wrap;
 
     wrap.separator = function (sep) {
         if (!arguments.length) return separator;
         separator = sep;
 
-        wrap();
+        return wrap;
+    };
+
+    wrap.text = function (selection) {
+        if (!arguments.length) return text;
+        text = selection;
 
         return wrap;
     };
@@ -76,16 +93,12 @@ d3.svg.textWrap = function (text, width, height) {
         if (!arguments.length) return height;
         height = ems;
 
-        wrap();
-
         return wrap;
     };
 
     wrap.width = function (pixels) {
         if (!arguments.length) return width;
         width = pixels;
-
-        wrap();
 
         return wrap;
     };
@@ -94,16 +107,12 @@ d3.svg.textWrap = function (text, width, height) {
         if (!arguments.length) return lineHeight;
         lineHeight = ems;
 
-        wrap();
-
         return wrap;
     };
 
     wrap.overflow = function () {
         return overflow;
     };
-
-    wrap();
 
     return wrap;
 };

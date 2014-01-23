@@ -43,8 +43,10 @@
                         .attr('y',10)
                         .text('This is some text, yo. It should wrap and get cut off at 6ems, yo. This is some text, yo. It should wrap and get cut off, yo.');
 
-        var wrap = d3.svg.textWrap(text,100)
-                        .height(6); // height is in ems
+        var wrap = d3.svg.textWrap()
+                            .width(100)
+                            .height(6) // height is in ems
+                            .wrap(text);
 
         if (wrap.overflow() === false) {
             console.error('test 2: wrap overflow should not equal false');
@@ -119,8 +121,9 @@
                         .attr('y',10)
                         .text('This is some text which should wrap on characters, not white space. Useful for supercalifragilisticexpialidocious and Chinese.');
 
-        d3.svg.textWrap(text,100)
-                .separator('');
+        d3.svg.textWrap()
+                .separator('')
+                .wrap(text,100);
 
         g.append('rect')
             .attr({
