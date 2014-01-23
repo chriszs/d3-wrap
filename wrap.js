@@ -23,14 +23,13 @@ d3.svg.textWrap = function (text, width, height) {
                 lineNumber = 0,
                 x = text.attr('x'),
                 y = text.attr('y'),
-                dy = parseFloat(text.attr('dy')),
+                dy = parseFloat(text.attr('dy')) || 0,
                 tspan = text.text(null)
                             .append('tspan')
                             .attr('x', x)
                             .attr('y', y)
                             .attr('dy', dy + 'em');
 
-            if (!dy) dy = 0;
 
             word = words.pop();
 
