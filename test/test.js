@@ -17,7 +17,7 @@
 
     text = g.append('text')
                     .attr('x',0)
-                    .attr('y',0)
+                    .attr('y',10)
                     .text('This is some text, yo. It should wrap, yo.');
 
     wrap = d3.svg.textWrap(text,100);
@@ -38,7 +38,7 @@
 
     text = g.append('text')
                     .attr('x',0)
-                    .attr('y',0)
+                    .attr('y',10)
                     .text('This is some text, yo. It should wrap and get cut off, yo. This is some text, yo. It should wrap and get cut off, yo.');
 
     wrap = d3.svg.textWrap(text,100)
