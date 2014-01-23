@@ -1,6 +1,7 @@
 d3.svg.textWrap = function (text, width, height) {
     var overflow = false,
-        separator = ' ';
+        separator = ' ',
+        lineHeight = 1.4; // ems
 
     /* core wrap code by Mike Bostock
     https://github.com/mbostock/d3/issues/1642
@@ -20,7 +21,6 @@ d3.svg.textWrap = function (text, width, height) {
             var word,
                 line = [],
                 lineNumber = 0,
-                lineHeight = 1.4, // ems
                 x = text.attr('x'),
                 y = text.attr('y'),
                 dy = parseFloat(text.attr('dy')),
@@ -85,6 +85,15 @@ d3.svg.textWrap = function (text, width, height) {
     wrap.width = function (pixels) {
         if (!arguments.length) return width;
         width = pixels;
+
+        wrap();
+
+        return wrap;
+    };
+
+    wrap.lineHeight = function (ems) {
+        if (!arguments.length) return lineHeight;
+        lineHeight = ems;
 
         wrap();
 
