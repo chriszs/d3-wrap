@@ -4,8 +4,13 @@
     line-height: 1.4em;
 }
 
-.testContainer line {
+.testContainer .bounds {
+    fill: none;
     stroke: black;
     stroke-width: 1px;
     shape-rendering: crispEdges;
+}
+
+.testContainer .bounds.target {
+    stroke: red;
 }

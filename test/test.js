@@ -22,12 +22,13 @@
 
     wrap = d3.svg.textWrap(text,100);
 
-    g.append('line')
+    g.append('rect')
         .attr({
-            'x1': 100,
-            'y1': 0,
-            'x2': 100,
-            'y2': 100
+            'class': 'target bounds',
+            'x': 0,
+            'y': 0,
+            'width': 100,
+            'height': 100
         });
 
 
@@ -48,22 +49,14 @@
         console.error('test 2: wrap overflow should not equal false');
     }
 
-
-    g.append('line')
+    g.append('rect')
         .attr({
-            'x1': 100,
-            'y1': 0,
-            'x2': 100,
-            'y2': '6em'
+            'class': 'target bounds',
+            'x': 0,
+            'y': 0,
+            'width': 100,
+            'height': '6em'
         });
 
-
-    g.append('line')
-        .attr({
-            'x1': 0,
-            'y1': '6em',
-            'x2': 100,
-            'y2': '6em'
-        });
 
 })();
