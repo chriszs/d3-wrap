@@ -1,6 +1,6 @@
 (function () {
-    var width = 900,
-        height = 600,
+    var width = 1100,
+        height = 800,
         margin = 50;
 
     var tests = [];
@@ -41,7 +41,7 @@
         var text = g.append('text')
                         .attr('x',0)
                         .attr('y',10)
-                        .text('This is some text, yo. It should wrap and get cut off, yo. This is some text, yo. It should wrap and get cut off, yo.');
+                        .text('This is some text, yo. It should wrap and get cut off at 6ems, yo. This is some text, yo. It should wrap and get cut off, yo.');
 
         var wrap = d3.svg.textWrap(text,100)
                         .height(6); // height is in ems
@@ -49,6 +49,78 @@
         if (wrap.overflow() === false) {
             console.error('test 2: wrap overflow should not equal false');
         }
+
+        g.append('rect')
+            .attr({
+                'class': 'target bounds',
+                'x': 0,
+                'y': 0,
+                'width': 100,
+                'height': '6em'
+            });
+    });
+
+    // test 3: text starts with space, wraps at 100 pixels
+
+    tests.push(function (x,y) {
+        var g = svg.append('g')
+                        .attr('transform','translate(' + x + ' ' + y + ')');
+
+        var text = g.append('text')
+                        .attr('x',0)
+                        .attr('y',10)
+                        .text(' This is some text, yo. It should wrap even though it starts with a space.');
+
+        d3.svg.textWrap(text,100);
+
+        g.append('rect')
+            .attr({
+                'class': 'target bounds',
+                'x': 0,
+                'y': 0,
+                'width': 100,
+                'height': '6em'
+            });
+    });
+
+
+    // test 4: text contains a very long word, wraps at 100 pixels, makes exception for that word
+
+    tests.push(function (x,y) {
+        var g = svg.append('g')
+                        .attr('transform','translate(' + x + ' ' + y + ')');
+
+        var text = g.append('text')
+                        .attr('x',0)
+                        .attr('y',10)
+                        .text('This is a very long word which should be rendered anyway: supercalifragilisticexpialidocious. Everything after it should be rendered too, and wrap.');
+
+        d3.svg.textWrap(text,100);
+
+        g.append('rect')
+            .attr({
+                'class': 'target bounds',
+                'x': 0,
+                'y': 0,
+                'width': 100,
+                'height': '6em'
+            });
+    });
+
+
+    // test 5: text split on every character, wrap at 100 pixels
+
+    tests.push(function (x,y) {
+        var g = svg.append('g')
+                        .attr('transform','translate(' + x + ' ' + y + ')');
+
+        var text = g.append('text')
+                        .attr('x',0)
+                        .attr('y',10)
+                        .text('This is some text which should wrap on characters, not white space. Useful for supercalifragilisticexpialidocious and Chinese.');
+
+        d3.svg.textWrap(text,100)
+                .separator('');
 
         g.append('rect')
             .attr({
@@ -76,8 +148,8 @@
 
             curX += 200;
 
-            if (curX > width-margin) {
-                curY += 200;
+            if (curX+200 > width-margin) {
+                curY += 300;
                 curX = margin;
             }
         });

@@ -1,3 +1,7 @@
+.testContainer svg {
+    border: 1px solid gray;
+}
+
 .testContainer text {
     font-family: Arial;
     font-size: 13px;
