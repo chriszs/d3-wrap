@@ -27,8 +27,11 @@ d3.svg.textWrap = function (text, width, height) {
                 lineNumber = 0,
                 x = text.attr('x'),
                 y = text.attr('y'),
-                dy = parseFloat(text.attr('dy')) || 0,
-                tspan = text.text(null)
+                dy = parseFloat(text.attr('dy'));
+
+            if (!dy) dy = 0;
+
+            var tspan = text.text(null)
                             .append('tspan')
                             .attr('x', x)
                             .attr('y', y)
